@@ -29,11 +29,32 @@ function initMap() {
   locations.forEach(function (loc) {
     loc.marker = new google.maps.Marker({
       position: loc,
-      label: loc.label[0],
+      // label: loc.label[0],
+      title: loc.label,
+      icon: 'http://maps.google.com/mapfiles/marker' + loc.label[0] + '.png',
       map: map
     });
+    loc.marker.addListener('click', onMarkerClick);
   });
+  var infowindow = new google.maps.InfoWindow({
+    content: '<h1>Zelia</h1>'
+  });
+
+  function onMarkerClick() {
+    var marker = this;
+    animateMarker(marker);
+    infowindow.open(map, marker);
+  }
+
+  function animateMarker(marker) {
+    // var self = this;
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function () {
+      marker.setAnimation(null);
+    }, 2000);
+  }
 }
+
 
 // Overall viewmodel for this screen, along with initial state
 function MyViewModel() {
@@ -51,6 +72,13 @@ function MyViewModel() {
       return isMatch;
     });
   });
+
+  self.onListItemClick = function (location) {
+    console.log(location.marker);
+    // location.marker.click();
+    google.maps.event.trigger(location.marker, 'click', {});
+    // console.log(123);
+  };
   // var self = this;
   //
   // // Non-editable catalog data - would come from the server

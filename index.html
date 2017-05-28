@@ -21,17 +21,20 @@
       <a href="#">Clients</a>
       <a href="#">Contact</a> -->
       <ul data-bind="foreach: filteredLocations">
-        <li data-bind="text: label"></li>
+        <!-- <li data-bind="text: label"></li> -->
+        <li>
+          <a href="#" data-bind="text: label, click: $parent.onListItemClick"></a>
+        </li>
       </ul>
     </div>
 
-<div>
-  <!-- Use any element to open the sidenav -->
-  <span onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span>
-  <form action="" class="inline-block">
-    Filter:<input data-bind="textInput: locationFilter"></input>
-  </form>
-</div>
+    <div>
+      <!-- Use any element to open the sidenav -->
+      <span onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span>
+      <form action="" class="inline-block">
+        Filter:<input data-bind="textInput: locationFilter"></input>
+      </form>
+    </div>
 
     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="main">
