@@ -14,29 +14,24 @@
 
   <body>
 
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <!-- <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a> -->
+    <div id="mySidenav" class="sidebar">
+      <!-- The element to close the sidebar -->
+      <a href="javascript:void(0)" class="closebtn" data-bind="click: closeNav">&times;</a>
+
+      <form action="" class="inline-block">
+        Filter:<input data-bind="textInput: locationFilter"></input>
+      </form>
       <ul data-bind="foreach: filteredLocations">
-        <!-- <li data-bind="text: label"></li> -->
         <li>
           <a href="#" data-bind="text: label, click: $parent.onListItemClick"></a>
         </li>
       </ul>
     </div>
 
-    <div>
-      <!-- Use any element to open the sidenav -->
-      <span onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span>
-      <form action="" class="inline-block">
-        Filter:<input data-bind="textInput: locationFilter"></input>
-      </form>
-    </div>
 
-    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+    <!-- The element to open the sidebar -->
+    <span class="openbtn" data-bind="click: openNav">Locations <i class="fa fa-bars" aria-hidden="true"></i></span>
+
     <div id="main">
       <div id="map"></div>
     </div>
@@ -45,7 +40,6 @@
     <!-- <script src="js/jquery-1.10.2.js"></script> -->
     <script src='js/knockout-3.4.2.js'></script>
     <!-- <script src='js/bootstrap-3.3.7.js'></script> -->
-    <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdMTqVzLOVsy-ipiPA3ZXJwwu4kOyq-mE&callback=initMap">
     </script>

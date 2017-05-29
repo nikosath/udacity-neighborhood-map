@@ -7,6 +7,21 @@ var locations = [{
     label: 'Temple of Olympian Zeus, Athens',
     lat: 37.969300,
     lng: 23.733111
+  },
+  {
+    label: 'Acropolis Museum',
+    lat: 37.968444,
+    lng: 23.728505
+  },
+  {
+    label: 'Odeon of Herodes Atticus',
+    lat: 37.970777,
+    lng: 23.724512
+  },
+  {
+    label: 'Roman Agora',
+    lat: 37.974375,
+    lng: 23.725522
   }
 ];
 
@@ -14,17 +29,9 @@ function initMap() {
   var map;
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
+    zoom: 15,
     center: locations[0]
   });
-
-  // var markers = locations.map(function (location, i) {
-  //   return new google.maps.Marker({
-  //     position: location,
-  //     label: location.label[0],
-  //     map: map
-  //   });
-  // });
 
   locations.forEach(function (loc) {
     loc.marker = new google.maps.Marker({
@@ -38,13 +45,9 @@ function initMap() {
     loc.marker.addListener('click', onMarkerClick);
   });
 
-  var infowindow = new google.maps.InfoWindow({maxWidth: 300});
-  // var infowindow = new google.maps.InfoWindow({
-  //   content: '<h1>Zelia</h1>'
-  //   // content: function () {
-  //   //
-  //   // }
-  // });
+  var infowindow = new google.maps.InfoWindow({
+    maxWidth: 300
+  });
 
   function onMarkerClick() {
     var marker = this;
@@ -57,15 +60,7 @@ function initMap() {
 
     } else {
       infowindow.setContent(marker.wikiDesc);
-
     }
-
-    // setTimeout(function () {
-    //   infowindow.setContent(marker.wikiDesc + 'ready');
-    // }, 2000);
-    // infowindow.setContent(getWikipediaData(marker.title));
-    // infowindow.setContent('<h3>' + marker.title + '</h3>');
-    // console.log(marker);
     infowindow.open(map, marker);
   }
 
@@ -78,44 +73,16 @@ function initMap() {
         prop: 'text',
         section: '0',
         format: 'json'
-        // action: 'query',
-        // titles: place,
-        // prop: 'revisions',
-        // rvprop: 'content',
-        // list: 'search',
       },
       dataType: 'jsonp',
       success: function (data) {
         marker.wikiDesc = processData(data);
         infowindow.setContent(marker.wikiDesc);
-      }
-    });
-  }
-  // var playListURL = 'http://en.wikipedia.org/w/api.php?format=json&action=query&titles=India&prop=revisions&rvprop=content&callback=?';
-  // http://en.wikipedia.org/w/api.php?format=json&action=query&titles=Acropolis of Athens&prop=revisions&rvprop=content
-  function getWikipediaData(place) {
-    var processedData;
-    $.ajax({
-      url: 'http://en.wikipedia.org/w/api.php',
-      data: {
-        action: 'parse',
-        // action: 'query',
-        // titles: place,
-        page: place,
-        // prop: 'revisions',
-        prop: 'text',
-        section: '0',
-        // rvprop: 'content',
-        // list: 'search',
-        format: 'json'
       },
-      dataType: 'jsonp',
-      success: function (data) {
-        processedData = processData(data);
+      error: function () {
+        infowindow.setContent('Unable to retrieve data.');
       }
     });
-    console.log(processedData);
-    return processedData;
   }
 
   function processData(data) {
@@ -132,21 +99,11 @@ function initMap() {
 
     // remove cite error
     blurb.find('.mw-ext-cite-error').remove();
-    // $('#article').html($(blurb).find('p'));
 
-    // console.log(data);
-    // console.log(blurb);
-    // $.each(result.query.pages, function (i, item) {
-    //   console.log(item.title);
-    // });
     return $(blurb).find('p').html();
-    // return '<h1>return</h1>'
-    // return markup;
-
   }
 
   function animateMarker(marker) {
-    // var self = this;
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function () {
       marker.setAnimation(null);
@@ -154,30 +111,33 @@ function initMap() {
   }
 }
 
-// Overall viewmodel for this screen, along with initial state
 function MyViewModel() {
   var self = this;
-  // Editable data
-  //self.filteredLocations = ko.observableArray(locations);
+
   self.locationFilter = ko.observable('');
   self.filteredLocations = ko.computed(function () {
     return locations.filter(function (loc) {
       var isMatch = loc.label.includes(self.locationFilter());
       if (loc.marker !== undefined) {
         loc.marker.setVisible(isMatch);
-        // loc.marker.setMap(isMatch ? map : null);
       }
       return isMatch;
     });
   });
 
   self.onListItemClick = function (location) {
-    // console.log(location.marker);
-    // location.marker.click();
     google.maps.event.trigger(location.marker, 'click', {});
-    // console.log(123);
   };
 
+  /* Set the width of the side navigation to 250px */
+  self.openNav = function () {
+    document.getElementById("mySidenav").style.width = "250px";
+  };
+
+  /* Set the width of the side navigation to 0 */
+  self.closeNav = function () {
+    document.getElementById("mySidenav").style.width = "0";
+  };
 }
 
 ko.applyBindings(new MyViewModel());
