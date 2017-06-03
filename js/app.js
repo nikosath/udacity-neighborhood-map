@@ -111,10 +111,6 @@ function initMap() {
   }
 
 }
-function mapError() {
-  // window.alert("Map couldn't be loaded.");
-  console.log("map error");
-}
 
 function MyViewModel() {
   var self = this;
