@@ -1,4 +1,7 @@
-html, body, #main, #map {
+html,
+body,
+#main,
+#map {
   height: 100%;
   width: 100%;
 }
@@ -26,11 +29,13 @@ html, body, #main, #map {
   transition: 0.2s
 }
 
-.sidebar a:hover, .offcanvas a:focus {
+.sidebar a:hover,
+.offcanvas a:focus {
   color: #f1f1f1;
 }
 
-.openbtn, .sidebar .closebtn {
+.openbtn,
+.sidebar .closebtn {
   position: absolute;
   top: 0;
   right: 25px;

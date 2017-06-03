@@ -14,12 +14,12 @@
 
   <body>
 
-    <div id="mySidenav" class="sidebar">
+    <div id="mySidebar" class="sidebar">
       <!-- The element to close the sidebar -->
-      <a href="javascript:void(0)" class="closebtn" data-bind="click: closeNav">&times;</a>
+      <a href="javascript:void(0)" class="closebtn" data-bind="click: closeBar">&times;</a>
 
-      <form action="" class="inline-block">
-        Filter:<input data-bind="textInput: locationFilter"></input>
+      <form class="inline-block">
+        Filter:<input data-bind="textInput: locationFilter" />
       </form>
       <ul data-bind="foreach: filteredLocations">
         <li>
@@ -30,7 +30,7 @@
 
 
     <!-- The element to open the sidebar -->
-    <span class="openbtn" data-bind="click: openNav">Locations <i class="fa fa-bars" aria-hidden="true"></i></span>
+    <span class="openbtn" data-bind="click: openBar">Locations <i class="fa fa-bars" aria-hidden="true"></i></span>
 
     <div id="main">
       <div id="map"></div>
@@ -41,8 +41,7 @@
     <script src='js/knockout-3.4.2.js'></script>
     <!-- <script src='js/bootstrap-3.3.7.js'></script> -->
     <script src="js/app.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdMTqVzLOVsy-ipiPA3ZXJwwu4kOyq-mE&callback=initMap">
-    </script>
+    <script async defer src="js/loadmap.js"></script>
   </body>
 
 </html>

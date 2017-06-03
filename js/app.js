@@ -107,8 +107,13 @@ function initMap() {
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function () {
       marker.setAnimation(null);
-    }, 2000);
+    }, 1400);
   }
+
+}
+function mapError() {
+  // window.alert("Map couldn't be loaded.");
+  console.log("map error");
 }
 
 function MyViewModel() {
@@ -117,7 +122,7 @@ function MyViewModel() {
   self.locationFilter = ko.observable('');
   self.filteredLocations = ko.computed(function () {
     return locations.filter(function (loc) {
-      var isMatch = loc.label.includes(self.locationFilter());
+      var isMatch = loc.label.toLowerCase().includes(self.locationFilter().toLowerCase());
       if (loc.marker !== undefined) {
         loc.marker.setVisible(isMatch);
       }
@@ -129,14 +134,14 @@ function MyViewModel() {
     google.maps.event.trigger(location.marker, 'click', {});
   };
 
-  /* Set the width of the side navigation to 250px */
-  self.openNav = function () {
-    document.getElementById("mySidenav").style.width = "250px";
+  /* Set the width of the sidebar to 250px */
+  self.openBar = function () {
+    document.getElementById("mySidebar").style.width = "250px";
   };
 
-  /* Set the width of the side navigation to 0 */
-  self.closeNav = function () {
-    document.getElementById("mySidenav").style.width = "0";
+  /* Set the width of the sidebar to 0 */
+  self.closeBar = function () {
+    document.getElementById("mySidebar").style.width = "0";
   };
 }
 
