@@ -11,7 +11,7 @@ these locations.
 ## Usage
 
 You may visit `index.html` at the
-[github project page](http://www.nikosath.space/udacity-neighborhood-map/).
+[github project page](http://www.nikosath.net/udacity-neighborhood-map/).
 As an alternative, you can run the app on `localhost:8080` by setting up a local
 server by e.g. using one of these Python methods:
 
